@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import LeaderboardList from "../components/Leaderboardlist";
+import LeaderboardList from "../components/LeaderboardList";
 import Header from "../components/Header";
 
 function medalClass(rank) {
