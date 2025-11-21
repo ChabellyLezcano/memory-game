@@ -49,7 +49,6 @@ export default function LoginPage() {
             <div className="h-12 w-12 rounded-2xl bg-black text-white grid place-items-center shadow-sm ring-1 ring-black/10 floaty">
               <i className="pi pi-clone text-xl" />
             </div>
-            {/* tiny orbit dots */}
             <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-white" />
             <span className="absolute -left-1 -bottom-1 h-2.5 w-2.5 rounded-full bg-indigo-400 ring-2 ring-white" />
           </div>
@@ -70,10 +69,10 @@ export default function LoginPage() {
             <i className="pi pi-code text-[10px]" /> Web Tech
           </span>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 ring-1 ring-slate-200">
-            <i className="pi pi-bolt text-[10px]" /> Fast bonus
+            <i className="pi pi-bolt text-[10px]" /> Easy and Fast
           </span>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 ring-1 ring-slate-200">
-            <i className="pi pi-database text-[10px]" /> Firestore
+            <i className="pi pi-database text-[10px]" /> Memory Game
           </span>
         </div>
 
