@@ -13,7 +13,7 @@ export default function Header({
         {/* Left */}
         <div className="flex items-center gap-3 min-w-0">
           {/* Animated logo */}
-          <div className="relative [perspective:600px] shrink-0">
+          <div className="relative perspective-[600px] shrink-0">
             <div className="h-12 w-12 rounded-2xl bg-black text-white grid place-items-center shadow-sm ring-1 ring-black/10 logo-fancy">
               <i className="pi pi-clone text-xl" />
             </div>

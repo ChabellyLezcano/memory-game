@@ -11,7 +11,6 @@ import {
 import { db } from "../api/firebase";
 import { LEVELS, buildDeck } from "../data/data";
 import CardGrid from "../components/CardGrid";
-import LeaderboardList from "../components/LeaderboardList";
 import Header from "../components/Header";
 
 function computeBonus(level, elapsedMs) {
@@ -190,55 +189,70 @@ export default function GamePage() {
     <main className="min-h-screen bg-linear-to-b from-slate-50 via-slate-100 to-slate-200">
       <Header title="Memory Game" backLink={{ to: "/", label: "Back to login" }} />
 
-      <div className="relative flex items-center justify-between">
-        {/* LEFT */}
-        <div>
-          <div className="flex flex-wrap gap-4">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900">{level.name}</h2>
-            </div>
-            <div>
-              {lastBonus > 0 && !showSummary && (
-                <div className="text-xs font-semibold text-emerald-700 bg-emerald-50 ring-1 ring-emerald-200 px-2 py-1 rounded-lg w-fit">
-                  Speed bonus +{lastBonus}!
+      <div className="mx-auto max-w-5xl px-4 py-6 md:py-10">
+        <div className="bg-white/80 backdrop-blur rounded-3xl shadow-lg ring-1 ring-slate-200/70 p-4 md:p-6 space-y-6">
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+            {/* GAME */}
+            <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm ring-1 ring-slate-200 p-4 md:p-5 space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex flex-wrap gap-4">
+                    <div>
+                      <h2 className="text-lg font-bold text-slate-900">{level.name}</h2>
+                    </div>
+                    <div>
+                      {lastBonus > 0 && !showSummary && (
+                        <div className="text-xs font-semibold text-emerald-700 bg-emerald-50 ring-1 ring-emerald-200 px-2 py-1 rounded-lg w-fit">
+                          Speed bonus +{lastBonus}!
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-500">
+                    Matches: {pairsMatched}/{level.pairs}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">Time</p>
+                    <p className="font-extrabold text-slate-900">{elapsedSec}s</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">Level</p>
+                    <p className="font-extrabold text-slate-900">{levelPoints}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">Total</p>
+                    <p className="font-extrabold text-slate-900">{totalPoints}</p>
+                  </div>
+                </div>
+              </div>
+
+              <CardGrid deck={deck} onCardClick={flip} disabled={lock} />
+
+              {showSummary && (
+                <div className="rounded-xl bg-slate-50 ring-1 ring-slate-200 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <p className="font-bold text-slate-900">Level completed!</p>
+                    <p className="text-sm text-slate-600">
+                      Level points: {levelPoints} · Level time: {levelTimeSec}s
+                    </p>
+                    <p className="text-sm text-slate-600">Total so far: {totalPoints}</p>
+                  </div>
+
+                  <button
+                    onClick={nextLevelOrFinish}
+                    className="h-10 px-4 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition"
+                  >
+                    {levelIndex < LEVELS.length - 1
+                      ? "Next level"
+                      : "Finish & save score"}
+                  </button>
                 </div>
               )}
             </div>
-          </div>
-
-          <p className="text-xs text-slate-500">
-            Matches: {pairsMatched}/{level.pairs}
-          </p>
-        </div>
-
-        {/* CENTER TROPHY */}
-        <div
-          className="
-      absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-      h-11 w-11 sm:h-12 sm:w-12 rounded-2xl
-      bg-amber-50 text-amber-700 ring-1 ring-amber-200
-      grid place-items-center shadow-sm
-      trophy-pop
-    "
-          aria-hidden
-        >
-          <i className="pi pi-trophy text-lg sm:text-xl" />
-        </div>
-
-        {/* RIGHT */}
-        <div className="flex items-center gap-4">
-          <div className="text-right">
-            <p className="text-xs text-slate-500">Time</p>
-            <p className="font-extrabold text-slate-900">{elapsedSec}s</p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-slate-500">Level</p>
-            <p className="font-extrabold text-slate-900">{levelPoints}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-slate-500">Total</p>
-            <p className="font-extrabold text-slate-900">{totalPoints}</p>
-          </div>
+          </section>
         </div>
       </div>
     </main>

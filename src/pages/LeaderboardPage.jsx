@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import LeaderboardList from "../components/LeaderboardList";
+import LeaderboardList from "../components/Leaderboardlist";
 import Header from "../components/Header";
 
 function medalClass(rank) {
@@ -17,7 +17,6 @@ export default function LeaderboardPage() {
   const totalTimeMs = state?.totalTimeMs;
   const username = state?.username;
 
-  const trophyImg = "/images/trophy.jpg"; // ✅ public/images/trophy.jpg
   const totalTimeSec = totalTimeMs != null ? Math.floor(totalTimeMs / 1000) : null;
 
   return (
@@ -31,7 +30,6 @@ export default function LeaderboardPage() {
 
             <div className="flex items-center justify-between gap-4">
               <div>
-                {/* medal bubble + text */}
                 <div className="flex items-center gap-2">
                   <span
                     className={
@@ -41,7 +39,7 @@ export default function LeaderboardPage() {
                   >
                     {rank}
                   </span>
-                  <p className="text-lg font-extrabold text-slate-900">position</p>
+                  <p className="text-lg font-extrabold text-slate-900">Position</p>
                 </div>
 
                 <p className="text-sm text-slate-600 mt-1">
@@ -54,33 +52,12 @@ export default function LeaderboardPage() {
                   </p>
                 )}
               </div>
-
-              {/* trophy image badge */}
-              <div
-                className="
-                  h-14 w-14 sm:h-16 sm:w-16
-                  rounded-2xl bg-amber-50 ring-1 ring-amber-200
-                  grid place-items-center shadow-sm
-                  trophy-pop shrink-0
-                "
-              >
-                <img
-                  src={trophyImg}
-                  alt="Trophy"
-                  className="h-9 w-9 sm:h-10 sm:w-10 object-contain drop-shadow-sm"
-                  draggable={false}
-                />
-              </div>
             </div>
-
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-200/30 blur-3xl" />
           </div>
         )}
 
-        {/* Ranking */}
         <div className="bg-white/90 backdrop-blur rounded-2xl shadow-sm ring-1 ring-slate-200 p-5 space-y-4">
           <p className="text-sm text-slate-500">Top attempts by total score.</p>
-
           <LeaderboardList limitTop={30} collectionName="attempts" />
         </div>
       </div>
